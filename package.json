@@ -1,0 +1,33 @@
+{
+    "name": "msal-redux",
+    "description": "MSAL integration with Redux",
+    "version": "1.0.0",
+    "author": "Thomas Lokshall <thomas@lokshall.no>",
+    "license": "(MIT OR Apache-2.0)",
+    "homepage": "https://github.com/zhevron/msal-redux#readme",
+    "bugs": {
+        "url": "https://github.com/zhevron/msal-redux/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zhevron/msal-redux.git"
+    },
+    "dependencies": {
+        "msal": "^0.1",
+        "prop-types": "^15.0",
+        "react": "^16.0",
+        "redux": "^3.0"
+    },
+    "devDependencies": {
+        "@types/prop-types": "^15.0",
+        "@types/react": "^16.0",
+        "tslint": "^5.8",
+        "typescript": "^2.6"
+    },
+    "scripts": {
+        "build": "tsc --project tsconfig.json",
+        "lint": "tslint src/**/*.ts* -t verbose"
+    },
+    "main": "lib/index.js",
+    "typings": "lib/index.d.ts"
+}
