@@ -1,30 +1,32 @@
-import * as Msal from "msal";
 import { Action } from "redux";
 
-export const MSAL_TOKEN_RECEIVED_SUCCESS = "@@msal/token_received_success";
-export const MSAL_TOKEN_RECEIVED_ERROR = "@@msal/token_received_error";
+import * as Constants from "./Constants";
+import { IMsalState } from "./Types";
 
-export interface IMsalState {
-    access_token?: string;
-    id_token?: string;
-    refresh_token?: string;
+function createInitialState(): IMsalState {
+    return {};
 }
 
-export const initialState: IMsalState = {
-    access_token: null,
-    id_token: null,
-    refresh_token: null,
-};
-
-export function msalReducer(state = initialState, action: Action): IMsalState {
-    console.log(action);
-
+export function msalReducer(state = createInitialState(), action: Action): IMsalState {
     switch (action.type) {
-        case MSAL_TOKEN_RECEIVED_SUCCESS:
-            //
+        case Constants.MSAL_ACCESS_TOKEN_RECEIVED:
+            return {
+                ...state,
+                accessToken: (action as any).accessToken,
+                user: (action as any).user,
+            };
 
-        case MSAL_TOKEN_RECEIVED_ERROR:
-            //
+        case Constants.MSAL_SIGN_IN_FAILURE:
+            return {
+                ...state,
+                user: null,
+            };
+
+        case Constants.MSAL_SIGN_OUT:
+            return {
+                ...state,
+                user: null,
+            };
 
         default:
             return state;

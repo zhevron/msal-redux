@@ -13,15 +13,16 @@
         "url": "git+https://github.com/zhevron/msal-redux.git"
     },
     "dependencies": {
-        "msal": "^0.1",
-        "prop-types": "^15.0",
-        "react": "^16.0",
-        "redux": "^3.0"
+        "msal": "^0.1"
+    },
+    "peerDependencies": {
+        "redux": "^3.7",
+        "redux-saga": "^0.16"
     },
     "devDependencies": {
-        "@types/prop-types": "^15.0",
-        "@types/react": "^16.0",
-        "tslint": "^5.8",
+        "redux": "^3.7",
+        "redux-saga": "^0.16.0",
+        "tslint": "^5.9",
         "typescript": "^2.6"
     },
     "scripts": {

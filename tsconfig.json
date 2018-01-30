@@ -1,9 +1,12 @@
 {
     "compilerOptions": {
+        "declaration": true,
+        "downlevelIteration": true,
+        "lib": ["dom", "dom.iterable", "es2015", "es2015.iterable"],
+        "module": "commonjs",
+        "noImplicitAny": true,
         "outDir": "./lib/",
         "sourceMap": true,
-        "noImplicitAny": true,
-        "module": "commonjs",
         "target": "es5"
     },
     "include": [
