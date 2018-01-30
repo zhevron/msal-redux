@@ -67,18 +67,18 @@ sagaMiddleware.run(msalSaga, clientId, authority, null);
 
 ### Actions dispatched by the user
 
-| Constant                     | Payload | Description
-|------------------------------|---------|-------------
-| `MSAL_SIGN_IN`               | None    | Dispatch this action when you want to require a user to sign in to your application.
-| `MSAL_SIGN_OUT`              | None    | Dispatch this action when you want a user to be signed out.
+| Constant                     | Payload                 | Description
+|------------------------------|-------------------------|-------------
+| `MSAL_SIGN_IN`               | `{ scopes?: string[] }` | Dispatch this action when you want to require a user to sign in to your application.
+| `MSAL_SIGN_OUT`              | None                    | Dispatch this action when you want a user to be signed out.
 
 ### Actions dispatched by the library
 
-| Constant                     | Payload                                | Description
-|------------------------------|----------------------------------------|-------------
-| `MSAL_ACCESS_TOKEN_RECEIVED` | `{ accessToken: string; user: User }`  | Dispatched when the user is successfully signed in or the access token is refreshed.
-| `MSAL_CALLBACK_PROCESSED`    | None                                   | Dispatched after the callback from sign-in has been processed. Useful for removing the hash from the URL.
-| `MSAL_SIGN_IN_FAILURE`       | `{ error: string; errorDesc: string }` | Dispatched if a sign-in fails.
+| Constant                     | Payload                                                 | Description
+|------------------------------|---------------------------------------------------------|-------------
+| `MSAL_ACCESS_TOKEN_RECEIVED` | `{ accessToken: string; scopes: string[]; user: User }` | Dispatched when the user is successfully signed in or the access token is refreshed.
+| `MSAL_CALLBACK_PROCESSED`    | None                                                    | Dispatched after the callback from sign-in has been processed. Useful for removing the hash from the URL.
+| `MSAL_SIGN_IN_FAILURE`       | `{ error: string }`                                     | Dispatched if a sign-in fails.
 
 ## License
 

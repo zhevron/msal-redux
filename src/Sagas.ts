@@ -10,28 +10,40 @@ let userAgentApplication: UserAgentApplication = null;
 
 function* accessTokenReceived(action: Action): any {
     yield delay(600000);
-    yield call(acquireNewAccessToken);
+    yield call(acquireNewAccessToken, (action as any).scopes);
 }
 
-function* acquireNewAccessToken(): SagaIterator {
-    const accessToken: string = yield (userAgentApplication.acquireTokenSilent(
-        [userAgentApplication.clientId],
-        null,
-        userAgentApplication.getUser(),
-    ) as any);
-    yield put({ type: Constants.MSAL_ACCESS_TOKEN_RECEIVED, accessToken, user: userAgentApplication.getUser() });
+function* acquireNewAccessToken(scopes: string[]): SagaIterator {
+    try {
+        const accessToken: string = yield (userAgentApplication.acquireTokenSilent(
+            [userAgentApplication.clientId],
+            null,
+            userAgentApplication.getUser(),
+        ) as any);
+
+        yield put({
+            type: Constants.MSAL_ACCESS_TOKEN_RECEIVED,
+            accessToken,
+            scopes,
+            user: userAgentApplication.getUser(),
+        });
+    } catch (error) {
+        yield put({ type: Constants.MSAL_SIGN_IN_FAILURE, error });
+    }
 }
 
 function* signIn(action: Action): SagaIterator {
+    const scopes: string[] = (action as any).scopes || [userAgentApplication.clientId];
+
     if (userAgentApplication.isCallback(window.location.hash)) {
         userAgentApplication._processCallBack(window.location.hash);
         yield put({ type: Constants.MSAL_CALLBACK_PROCESSED });
     }
 
     if (userAgentApplication.getUser()) {
-        yield call(acquireNewAccessToken);
+        yield call(acquireNewAccessToken, scopes);
     } else {
-        userAgentApplication.loginRedirect([userAgentApplication.clientId]);
+        userAgentApplication.loginRedirect(scopes);
     }
 }
 
