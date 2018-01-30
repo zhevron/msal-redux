@@ -14,7 +14,7 @@ npm install msal-redux --save
 
 ### TypeScript
 
-```ts
+```typescript
 import { IMsalState, msalReducer, msalSaga } from "msal-redux";
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import createSagaMiddleware from "redux-saga";
@@ -40,7 +40,7 @@ sagaMiddleware.run(msalSaga, clientId, authority, null);
 
 ### JavaScript
 
-```js
+```javascript
 import { msalReducer, msalSaga } from "msal-redux";
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import createSagaMiddleware from "redux-saga";
@@ -76,7 +76,7 @@ sagaMiddleware.run(msalSaga, clientId, authority, null);
 
 | Constant                     | Payload                                | Description
 |------------------------------|----------------------------------------|-------------
-| `MSAL_ACCESS_TOKEN_RECEIVED` | `{ token: string; user: User }`        | Dispatched when the user is successfully signed in or the access token is refreshed.
+| `MSAL_ACCESS_TOKEN_RECEIVED` | `{ accessToken: string; user: User }`  | Dispatched when the user is successfully signed in or the access token is refreshed.
 | `MSAL_CALLBACK_PROCESSED`    | None                                   | Dispatched after the callback from sign-in has been processed. Useful for removing the hash from the URL.
 | `MSAL_SIGN_IN_FAILURE`       | `{ error: string; errorDesc: string }` | Dispatched if a sign-in fails.
 
