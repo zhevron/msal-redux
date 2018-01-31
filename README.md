@@ -67,10 +67,10 @@ sagaMiddleware.run(msalSaga, clientId, authority, null);
 
 ### Actions dispatched by the user
 
-| Constant                     | Payload                 | Description
-|------------------------------|-------------------------|-------------
-| `MSAL_SIGN_IN`               | `{ scopes?: string[] }` | Dispatch this action when you want to require a user to sign in to your application.
-| `MSAL_SIGN_OUT`              | None                    | Dispatch this action when you want a user to be signed out.
+| Constant                     | Payload                                  | Description
+|------------------------------|------------------------------------------|-------------
+| `MSAL_SIGN_IN`               | `{ popup?: boolean; scopes?: string[] }` | Dispatch this action when you want to require a user to sign in to your application.
+| `MSAL_SIGN_OUT`              | None                                     | Dispatch this action when you want a user to be signed out.
 
 ### Actions dispatched by the library
 

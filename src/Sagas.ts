@@ -43,7 +43,20 @@ function* signIn(action: Action): SagaIterator {
     if (userAgentApplication.getUser()) {
         yield call(acquireNewAccessToken, scopes);
     } else {
-        userAgentApplication.loginRedirect(scopes);
+        const popup: boolean = (action as any).popup || false;
+
+        if (popup) {
+            const accessToken: string = yield (userAgentApplication.loginPopup(scopes) as any);
+
+            yield put({
+                type: Constants.MSAL_ACCESS_TOKEN_RECEIVED,
+                accessToken,
+                scopes,
+                user: userAgentApplication.getUser(),
+            });
+        } else {
+            userAgentApplication.loginRedirect(scopes);
+        }
     }
 }
 
