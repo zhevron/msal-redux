@@ -4,19 +4,19 @@ import { delay, SagaIterator } from "redux-saga";
 import { all, call, fork, put, select, takeLatest } from "redux-saga/effects";
 
 import * as Constants from "./Constants";
-import { IMsalOptions, IMsalState } from "./Types";
+import * as Types from "./Types";
 
 let userAgentApplication: UserAgentApplication = null;
 
-function* accessTokenReceived(action: Action): any {
+function* accessTokenReceived(action: Types.IMsalAccessTokenReceivedAction): any {
     yield delay(600000);
-    yield call(acquireNewAccessToken, (action as any).scopes);
+    yield call(acquireNewAccessToken, action.scopes);
 }
 
 function* acquireNewAccessToken(scopes: string[]): SagaIterator {
     try {
         const accessToken: string = yield (userAgentApplication.acquireTokenSilent(
-            [userAgentApplication.clientId],
+            scopes,
             null,
             userAgentApplication.getUser(),
         ) as any);
@@ -26,14 +26,14 @@ function* acquireNewAccessToken(scopes: string[]): SagaIterator {
             accessToken,
             scopes,
             user: userAgentApplication.getUser(),
-        });
+        } as Types.IMsalAccessTokenReceivedAction);
     } catch (error) {
-        yield put({ type: Constants.MSAL_SIGN_IN_FAILURE, error });
+        yield put({ type: Constants.MSAL_SIGN_IN_FAILURE, error } as Types.IMsalSignInFailureAction);
     }
 }
 
-function* signIn(action: Action): SagaIterator {
-    const scopes: string[] = (action as any).scopes || [userAgentApplication.clientId];
+function* signIn(action: Types.IMsalSignInAction): SagaIterator {
+    const scopes: string[] = action.scopes || [userAgentApplication.clientId];
 
     if (userAgentApplication.isCallback(window.location.hash)) {
         userAgentApplication._processCallBack(window.location.hash);
@@ -43,7 +43,7 @@ function* signIn(action: Action): SagaIterator {
     if (userAgentApplication.getUser()) {
         yield call(acquireNewAccessToken, scopes);
     } else {
-        const popup: boolean = (action as any).popup || false;
+        const popup: boolean = action.popup || false;
 
         if (popup) {
             const accessToken: string = yield (userAgentApplication.loginPopup(scopes) as any);
@@ -53,7 +53,7 @@ function* signIn(action: Action): SagaIterator {
                 accessToken,
                 scopes,
                 user: userAgentApplication.getUser(),
-            });
+            } as Types.IMsalAccessTokenReceivedAction);
         } else {
             userAgentApplication.loginRedirect(scopes);
         }
@@ -66,7 +66,7 @@ function* signOut(action: Action): SagaIterator {
     }
 }
 
-export function* msalSaga(clientId: string, authority: string, options?: IMsalOptions): SagaIterator {
+export function* msalSaga(clientId: string, authority: string, options?: Types.IMsalOptions): SagaIterator {
     userAgentApplication = new UserAgentApplication(clientId, authority, null, options);
 
     yield all([

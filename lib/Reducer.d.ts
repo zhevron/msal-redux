@@ -1,3 +1,3 @@
 import { Action } from "redux";
-import { IMsalState } from "./Types";
-export declare function msalReducer(state: IMsalState, action: Action): IMsalState;
+import * as Types from "./Types";
+export declare function msalReducer(state: Types.IMsalState, action: Action): Types.IMsalState;

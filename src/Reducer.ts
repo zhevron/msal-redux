@@ -1,19 +1,21 @@
 import { Action } from "redux";
 
 import * as Constants from "./Constants";
-import { IMsalState } from "./Types";
+import * as Types from "./Types";
 
-function createInitialState(): IMsalState {
+function createInitialState(): Types.IMsalState {
     return {};
 }
 
-export function msalReducer(state = createInitialState(), action: Action): IMsalState {
+export function msalReducer(state = createInitialState(), action: Action): Types.IMsalState {
     switch (action.type) {
         case Constants.MSAL_ACCESS_TOKEN_RECEIVED:
+            const accessTokenReceivedAction = action as Types.IMsalAccessTokenReceivedAction;
+
             return {
                 ...state,
-                accessToken: (action as any).accessToken,
-                user: (action as any).user,
+                accessToken: accessTokenReceivedAction.accessToken,
+                user: accessTokenReceivedAction.user,
             };
 
         case Constants.MSAL_SIGN_IN_FAILURE:
