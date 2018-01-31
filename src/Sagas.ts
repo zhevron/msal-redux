@@ -46,14 +46,18 @@ function* signIn(action: Types.IMsalSignInAction): SagaIterator {
         const popup: boolean = action.popup || false;
 
         if (popup) {
-            const accessToken: string = yield (userAgentApplication.loginPopup(scopes) as any);
+            try {
+                const accessToken: string = yield (userAgentApplication.loginPopup(scopes) as any);
 
-            yield put({
-                type: Constants.MSAL_ACCESS_TOKEN_RECEIVED,
-                accessToken,
-                scopes,
-                user: userAgentApplication.getUser(),
-            } as Types.IMsalAccessTokenReceivedAction);
+                yield put({
+                    type: Constants.MSAL_ACCESS_TOKEN_RECEIVED,
+                    accessToken,
+                    scopes,
+                    user: userAgentApplication.getUser(),
+                } as Types.IMsalAccessTokenReceivedAction);
+            } catch (error) {
+                yield put({ type: Constants.MSAL_SIGN_IN_FAILURE, error } as Types.IMsalSignInFailureAction);
+            }
         } else {
             userAgentApplication.loginRedirect(scopes);
         }
