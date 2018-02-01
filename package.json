@@ -23,7 +23,7 @@
         "redux": "^3.7",
         "redux-saga": "^0.16.0",
         "tslint": "^5.9",
-        "typescript": "^2.6"
+        "typescript": "^2.7"
     },
     "scripts": {
         "build": "tsc --project tsconfig.json",
