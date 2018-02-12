@@ -71,7 +71,12 @@ function* signOut(action: Action): SagaIterator {
 }
 
 export function* msalSaga(clientId: string, authority: string, options?: Types.IMsalOptions): SagaIterator {
-    userAgentApplication = new UserAgentApplication(clientId, authority, null, options);
+    const mergedOptions: Types.IMsalOptions = {
+        redirectUri: window.location.origin + "/",
+        ...options,
+    };
+
+    userAgentApplication = new UserAgentApplication(clientId, authority, null, mergedOptions);
 
     yield all([
         takeLatest(Constants.MSAL_ACCESS_TOKEN_RECEIVED, accessTokenReceived),
