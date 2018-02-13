@@ -1,11 +1,11 @@
-# MSAL for Redux applications &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/facebook/react/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/msal-redux.svg?style=flat)](https://www.npmjs.com/package/msal-redux)
+# MSAL for Redux applications
 
-This package attempts to gracefully integrate the authentication flow from [MSAL](https://github.com/AzureAD/microsoft-authentication-library-for-js) into [Redux](https://redux.js.org/) applications.
+This package attempts to integrate the authentication flow from [MSAL](https://github.com/AzureAD/microsoft-authentication-library-for-js) into [Redux](https://redux.js.org/) applications.
 
 ## Installation
 
 ```sh
-npm install msal-redux --save
+npm install https://github.com/zhevron/msal-redux.git --save
 ```
 
 *Note:* msal-redux requires `redux` and `redux-saga` as peer dependencies. Please install these in your project manually.
