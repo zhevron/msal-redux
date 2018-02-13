@@ -1,5 +1,5 @@
 {
-    "name": "msal-redux",
+    "name": "@zhevron/msal-redux",
     "description": "MSAL integration with Redux",
     "version": "1.0.0",
     "author": "Thomas Lokshall <thomas@lokshall.no>",

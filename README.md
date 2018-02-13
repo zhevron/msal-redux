@@ -5,7 +5,7 @@ This package attempts to integrate the authentication flow from [MSAL](https://g
 ## Installation
 
 ```sh
-npm install https://github.com/zhevron/msal-redux.git --save
+npm install @zhevron/msal-redux --save
 ```
 
 *Note:* msal-redux requires `redux` and `redux-saga` as peer dependencies. Please install these in your project manually.
@@ -15,7 +15,7 @@ npm install https://github.com/zhevron/msal-redux.git --save
 ### TypeScript
 
 ```typescript
-import { IMsalState, msalReducer, msalSaga } from "msal-redux";
+import { IMsalState, msalReducer, msalSaga } from "@zhevron/msal-redux";
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import createSagaMiddleware from "redux-saga";
 
@@ -41,7 +41,7 @@ sagaMiddleware.run(msalSaga, clientId, authority, null);
 ### JavaScript
 
 ```javascript
-import { msalReducer, msalSaga } from "msal-redux";
+import { msalReducer, msalSaga } from "@zhevron/msal-redux";
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import createSagaMiddleware from "redux-saga";
 
