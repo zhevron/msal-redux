@@ -5,7 +5,7 @@ import { Action } from "redux";
 export interface IMsalAccessTokenReceivedAction extends Action {
     accessToken: string;
     scopes: string[];
-    user: IMsalUser;
+    user: MsalUser;
 }
 
 export interface IMsalOptions {
@@ -28,10 +28,10 @@ export interface IMsalSignInFailureAction extends Action {
 
 export interface IMsalState {
     accessToken?: string;
-    user?: IMsalUser;
+    user?: MsalUser;
 }
 
-export class IMsalUser extends User {
+export class MsalUser extends User {
     public readonly roles: string[];
 
     public hasRole(role: string): boolean {

@@ -29,6 +29,7 @@ function* acquireNewAccessToken(scopes: string[]): SagaIterator {
             accessToken,
             scopes,
             user: {
+                ...(new Types.MsalUser(null, null, null, null)),
                 ...userAgentApplication.getUser(),
                 roles: decodedToken.roles || [],
             },
