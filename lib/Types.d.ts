@@ -4,7 +4,7 @@ import { Action } from "redux";
 export interface IMsalAccessTokenReceivedAction extends Action {
     accessToken: string;
     scopes: string[];
-    user: User;
+    user: IMsalUser;
 }
 export interface IMsalOptions {
     validateAuthority?: boolean;
@@ -23,5 +23,9 @@ export interface IMsalSignInFailureAction extends Action {
 }
 export interface IMsalState {
     accessToken?: string;
-    user?: User;
+    user?: IMsalUser;
+}
+export declare class IMsalUser extends User {
+    readonly roles: string[];
+    hasRole(role: string): boolean;
 }

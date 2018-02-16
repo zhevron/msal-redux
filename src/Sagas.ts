@@ -1,3 +1,4 @@
+import * as jwtDecode from "jwt-decode";
 import { Logger, UserAgentApplication } from "msal";
 import { Action } from "redux";
 import { delay, SagaIterator } from "redux-saga";
@@ -21,11 +22,16 @@ function* acquireNewAccessToken(scopes: string[]): SagaIterator {
             userAgentApplication.getUser(),
         ) as any);
 
+        const decodedToken: any = jwtDecode(accessToken);
+
         yield put({
             type: Constants.MSAL_ACCESS_TOKEN_RECEIVED,
             accessToken,
             scopes,
-            user: userAgentApplication.getUser(),
+            user: {
+                ...userAgentApplication.getUser(),
+                roles: decodedToken.roles || [],
+            },
         } as Types.IMsalAccessTokenReceivedAction);
     } catch (error) {
         yield put({ type: Constants.MSAL_SIGN_IN_FAILURE, error } as Types.IMsalSignInFailureAction);
