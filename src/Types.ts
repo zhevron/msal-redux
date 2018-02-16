@@ -33,8 +33,4 @@ export interface IMsalState {
 
 export class MsalUser extends User {
     public readonly roles: string[];
-
-    public hasRole(role: string): boolean {
-        return this.roles.indexOf(role) > -1;
-    }
 }

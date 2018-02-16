@@ -27,5 +27,4 @@ export interface IMsalState {
 }
 export declare class MsalUser extends User {
     readonly roles: string[];
-    hasRole(role: string): boolean;
 }
