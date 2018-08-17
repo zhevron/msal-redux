@@ -13,6 +13,11 @@ export interface IMsalOptions {
     postLogoutRedirectUri?: string;
     logger?: Logger;
     loadFrameTimeout?: number;
+    navigateToLoginRequestUrl?: boolean;
+    state?: string;
+    isAngular?: boolean;
+    unprotectedResources?: string[];
+    protectedResourceMap?: Map<string, string[]>;
 }
 export interface IMsalSignInAction extends Action {
     popup?: boolean;
