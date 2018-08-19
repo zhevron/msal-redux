@@ -7,7 +7,7 @@ function createInitialState(): Types.IMsalState {
     return {};
 }
 
-export function msalReducer(state = createInitialState(), action: Action): Types.IMsalState {
+export function msalReducer(state: Types.IMsalState | undefined, action: Action): Types.IMsalState {
     switch (action.type) {
         case Constants.MSAL_ACCESS_TOKEN_RECEIVED:
             const accessTokenReceivedAction = action as Types.IMsalAccessTokenReceivedAction;
@@ -31,6 +31,6 @@ export function msalReducer(state = createInitialState(), action: Action): Types
             };
 
         default:
-            return state;
+            return state || createInitialState();
     }
 }
