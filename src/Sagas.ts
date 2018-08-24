@@ -42,7 +42,7 @@ function* signIn(action: Types.IMsalSignInAction): SagaIterator {
     const scopes: string[] = action.scopes || [userAgentApplication.clientId];
 
     if (userAgentApplication.isCallback(window.location.hash)) {
-        userAgentApplication._processCallBack(window.location.hash);
+        // Already handled in userAgentApplication constructor
         yield put({ type: Constants.MSAL_CALLBACK_PROCESSED });
     }
 
@@ -79,6 +79,8 @@ function* signOut(action: Action): SagaIterator {
 export function* msalSaga(clientId: string, authority: string, options?: Types.IMsalOptions): SagaIterator {
     const mergedOptions: Types.IMsalOptions = {
         redirectUri: window.location.origin + "/",
+        // Avoid redirection on url callback
+        navigateToLoginRequestUrl: false,
         ...options,
     };
 
