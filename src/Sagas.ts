@@ -47,7 +47,7 @@ function* signIn(action: Types.IMsalSignInAction): SagaIterator {
     }
 
     const silent = action.silent || true;
-    if (userAgentApplication.getUser() && !silent) {
+    if (userAgentApplication.getUser() && silent) {
         yield call(acquireNewAccessToken, scopes);
     } else {
         const popup: boolean = action.popup || false;

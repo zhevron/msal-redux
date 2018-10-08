@@ -1,7 +1,7 @@
 {
     "name": "@zhevron/msal-redux",
     "description": "MSAL integration with Redux",
-    "version": "0.4.1",
+    "version": "0.4.2",
     "author": "Thomas Lokshall <thomas@lokshall.no>",
     "license": "(MIT OR Apache-2.0)",
     "homepage": "https://github.com/zhevron/msal-redux#readme",
