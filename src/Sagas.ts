@@ -46,7 +46,8 @@ function* signIn(action: Types.IMsalSignInAction): SagaIterator {
         yield put({ type: Constants.MSAL_CALLBACK_PROCESSED });
     }
 
-    if (userAgentApplication.getUser()) {
+    const silent = action.silent || true;
+    if (userAgentApplication.getUser() && !silent) {
         yield call(acquireNewAccessToken, scopes);
     } else {
         const popup: boolean = action.popup || false;

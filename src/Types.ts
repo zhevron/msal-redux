@@ -25,6 +25,7 @@ export interface IMsalOptions {
 export interface IMsalSignInAction extends Action {
     popup?: boolean;
     scopes?: string[];
+    silent?: boolean;
 }
 
 export interface IMsalSignInFailureAction extends Action {
