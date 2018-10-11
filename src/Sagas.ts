@@ -1,8 +1,8 @@
 import * as jwtDecode from "jwt-decode";
-import { Logger, UserAgentApplication } from "msal";
+import { UserAgentApplication } from "msal";
 import { Action } from "redux";
 import { delay, SagaIterator } from "redux-saga";
-import { all, call, fork, put, select, takeLatest } from "redux-saga/effects";
+import { all, call, put, takeLatest } from "redux-saga/effects";
 
 import * as Constants from "./Constants";
 import * as Types from "./Types";
@@ -46,8 +46,11 @@ function* signIn(action: Types.IMsalSignInAction): SagaIterator {
         yield put({ type: Constants.MSAL_CALLBACK_PROCESSED });
     }
 
-    const silent = action.silent || true;
-    if (userAgentApplication.getUser() && silent) {
+    const user = userAgentApplication.getUser();
+    const currentTime = Math.ceil(Date.now() / 1000);
+    const tokenExpired = user ? ((user.idToken as any).exp < currentTime) : false;
+
+    if (user && !tokenExpired) {
         yield call(acquireNewAccessToken, scopes);
     } else {
         const popup: boolean = action.popup || false;

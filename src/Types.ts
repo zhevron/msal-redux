@@ -1,4 +1,4 @@
-import { Logger, UserAgentApplication } from "msal";
+import { Logger } from "msal";
 import { User } from "msal/lib-commonjs/User";
 import { Action } from "redux";
 
@@ -25,7 +25,6 @@ export interface IMsalOptions {
 export interface IMsalSignInAction extends Action {
     popup?: boolean;
     scopes?: string[];
-    silent?: boolean;
 }
 
 export interface IMsalSignInFailureAction extends Action {
