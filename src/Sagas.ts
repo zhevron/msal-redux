@@ -1,8 +1,8 @@
 import * as jwtDecode from "jwt-decode";
 import { UserAgentApplication } from "msal";
 import { Action } from "redux";
-import { delay, SagaIterator } from "redux-saga";
-import { all, call, put, takeLatest } from "redux-saga/effects";
+import { SagaIterator } from "redux-saga";
+import { all, call, delay, put, takeLatest } from "redux-saga/effects";
 
 import * as Constants from "./Constants";
 import * as Types from "./Types";
