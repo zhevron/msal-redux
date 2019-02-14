@@ -1,7 +1,7 @@
 {
     "name": "@zhevron/msal-redux",
     "description": "MSAL integration with Redux",
-    "version": "0.5.0",
+    "version": "0.6.0",
     "author": "Thomas Lokshall <thomas@lokshall.no>",
     "license": "(MIT OR Apache-2.0)",
     "homepage": "https://github.com/zhevron/msal-redux#readme",
@@ -18,14 +18,14 @@
     },
     "peerDependencies": {
         "redux": "^4.0.0",
-        "redux-saga": "^0.16.1"
+        "redux-saga": "^1.0.1"
     },
     "devDependencies": {
         "@types/jwt-decode": "^2.2.1",
-        "redux": "^4.0.0",
-        "redux-saga": "^0.16.2",
-        "tslint": "^5.11.0",
-        "typescript": "^3.1.2"
+        "redux": "^4.0.1",
+        "redux-saga": "^1.0.1",
+        "tslint": "^5.12.1",
+        "typescript": "^3.3.3"
     },
     "scripts": {
         "build": "tsc --project tsconfig.json",
